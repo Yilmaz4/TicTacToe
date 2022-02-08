@@ -4,15 +4,15 @@ namespace TicTacToe
     {
         public class Board
         {
-            private List<List<int>> board = new List<List<int>>()
+            private List<List<int>> board = new()
                     {
                         new List<int>()
                         {
-                            1, 0, 2
+                            0, 0, 0
                         },
                         new List<int>()
                         {
-                            0, 2, 1
+                            0, 0, 0
                         },
                         new List<int>()
                         {
@@ -28,9 +28,9 @@ namespace TicTacToe
                 board[x][y] = val;
             }
         }
-        static void PrintBoard(Board board)
+        private static void RenderBoard(Board board)
         {
-            var marks = new Dictionary<int, string>()
+            Dictionary<int, string> marks = new()
             {
                 {0, " "},
                 {1, "x"},
@@ -39,24 +39,40 @@ namespace TicTacToe
             for (int i = 0; i < 3; i++)
             {
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                if (i != 3) Console.WriteLine(i == 0 ? "┌───┬───┬───┐" : "├───┼───┼───┤");
+                if (i != 3)
+                {
+                    Console.WriteLine(i == 0 ? "┌───┬───┬───┐" : "├───┼───┼───┤");
+                } 
+                Console.ResetColor();
                 for (int j = 0; j < 3; j++)
                 {
-                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.Write("│ "); Console.ResetColor(); Console.Write(marks[board.GetCell(i, 0)]);
-                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.Write("│ "); Console.ResetColor(); Console.Write(marks[board.GetCell(i, 1)]);
-                    Console.Write(" │ ");
-                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.Write("│ "); Console.ResetColor();
-                    Console.Write(" │ "); Console.Write(marks[board.GetCell(i, 2)] + " │");
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.Write("│ ");
+                    Console.ResetColor();
+                    Console.Write(marks[board.GetCell(i, j)]);
+                    Console.ForegroundColor= ConsoleColor.DarkGray;
+                    Console.Write((j == 2 ? " │\n" : " "));
                 }
-            
+                Console.ForegroundColor= ConsoleColor.DarkGray;
                 if (i == 2) Console.WriteLine("└───┴───┴───┘");
                 Console.ResetColor();
             }
         }
+        private static void DecideMove(Board board)
+        {
+
+        }
         public static void Main(string[] args)
         {
-            Board board = new Board();
-            PrintBoard(board);
+            Board board = new();
+            RenderBoard(board);
+            Console.Write("\nWelcome to TicTacToe! Who should start first? ");
+            string? input = Console.ReadLine();
+            List<string> inputs = new() {"Computer", "Me"};
+            if (inputs.OrderBy(s => string.Compare(s, input)).First() == "You")
+            {
+
+            }
         }
     }
 }
