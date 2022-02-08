@@ -1,4 +1,4 @@
-﻿namespace TicTacToe
+namespace TicTacToe
 {
     class Program
     {
@@ -8,11 +8,11 @@
                     {
                         new List<int>()
                         {
-                            0, 0, 0
+                            1, 0, 2
                         },
                         new List<int>()
                         {
-                            0, 0, 0
+                            0, 2, 1
                         },
                         new List<int>()
                         {
@@ -34,13 +34,23 @@
             {
                 {0, " "},
                 {1, "x"},
-                {2, "○"}
+                {2, "o"}
             };
             for (int i = 0; i < 3; i++)
             {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
                 if (i != 3) Console.WriteLine(i == 0 ? "┌───┬───┬───┐" : "├───┼───┼───┤");
-                Console.WriteLine("│ " + marks[board.GetCell(i, 0)] + " │ " + marks[board.GetCell(i, 1)] + " │ " + marks[board.GetCell(i, 2)] + " │");
+                for (int j = 0; j < 3; j++)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.Write("│ "); Console.ResetColor(); Console.Write(marks[board.GetCell(i, 0)]);
+                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.Write("│ "); Console.ResetColor(); Console.Write(marks[board.GetCell(i, 1)]);
+                    Console.Write(" │ ");
+                    Console.ForegroundColor = ConsoleColor.DarkGray; Console.Write("│ "); Console.ResetColor();
+                    Console.Write(" │ "); Console.Write(marks[board.GetCell(i, 2)] + " │");
+                }
+            
                 if (i == 2) Console.WriteLine("└───┴───┴───┘");
+                Console.ResetColor();
             }
         }
         public static void Main(string[] args)
